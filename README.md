@@ -21,8 +21,15 @@ npm start
 
 4. Make a request to the server via Postman
 ```bash
-GET http://localhost:3000/api/test-workflow?search=top%20home%20listing%20websites&location=<location> # I run test with location=harlem,%20ga (91 listings with many duplicates, 3 pages, shouldn't take too long to complete)
+GET http://localhost:3000/api/test-workflow?search=top%20home%20listing%20websites&location=<location>
+# I run test with location=harlem,%20ga (91 listings with many duplicates, 3 pages, shouldn't take too long to complete)
 ```
 
+### Notes
+
+- Currently, the crawler is not able to handle captcha perfectly - Zillow freaks out after the captcha is solved and return a different location.
+- I am not entirely sure if this default location when there is an error is based on the location of the user.
+- The crawler will still return the listings, but the location will be wrong.
+- If there is no captcha, the crawler will return the listings correctly. 
 
 
