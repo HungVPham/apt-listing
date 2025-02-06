@@ -185,7 +185,7 @@ export class ScraperService {
       }
 
       await this.page!.waitForSelector("#search", { timeout: 10000 });
-      await this.page!.screenshot({ path: "debug-search-results.png" });
+      await this.page!.screenshot({ path: "debug_screenshots/debug-search-results.png" });
 
       // Updated selector to find Zillow links in search results
       const links = await this.page!.$$eval(
@@ -211,7 +211,7 @@ export class ScraperService {
 
       if (links.length === 0) {
         // Debugging: Save current page state
-        await this.page!.screenshot({ path: "debug-no-zillow-links.png" });
+        await this.page!.screenshot({ path: "debug_screenshots/debug-no-zillow-links.png" });
         const html = await this.page!.content();
         require("fs").writeFileSync("debug-page.html", html);
 
@@ -357,7 +357,7 @@ export class ScraperService {
           console.log("Waiting for either popup or captcha...");
 
           // Take initial screenshot
-          await this.page!.screenshot({ path: "initial-state.png" });
+          await this.page!.screenshot({ path: "debug_screenshots/initial-state.png" });
 
           // Wait for either element to appear
           const element = await Promise.race([
@@ -424,7 +424,7 @@ export class ScraperService {
         } catch (error) {
           console.log("Challenge detection failed:", error);
           await this.page!.screenshot({
-            path: "challenge-detection-failed.png",
+            path: "debug_screenshots/challenge-detection-failed.png",
           });
         }
 

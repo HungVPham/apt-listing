@@ -27,9 +27,8 @@ GET http://localhost:3000/api/test-workflow?search=top%20home%20listing%20websit
 
 ### Notes
 
-- Currently, the crawler is not able to handle captcha perfectly - Zillow freaks out after the captcha is solved and return a different location.
-- I am not entirely sure if this default location when there is an error is based on the location of the user.
-- The crawler will still return the listings, but the location will be wrong.
-- If there is no captcha, the crawler will return the listings correctly. 
+Currently, the crawler sometimes encounters an issue with Zillow's CAPTCHA handling. Zillow's CAPTCHA is complex with inconsistent holding requirements (not the standard 10 seconds).
+After the crawler solves the CAPTCHA, Zillow will return a different location - the crawler will return the listings from the returned location.
 
+If there is no CAPTCHA (crawler sucessfully bypassed detection), the crawler will return the listings correctly.
 
