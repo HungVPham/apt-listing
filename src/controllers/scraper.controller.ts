@@ -4,15 +4,7 @@ import { ScraperService } from "../services/scraper.service";
 const scraper = new ScraperService();
 
 export class ScraperController {
-  static async getListings(req: Request, res: Response) {
-    try {
-      await scraper.initialize();
-      const results = await scraper.scrapeListings(req.query.search as string);
-      res.json({ listings: results });
-    } catch (error) {
-      res.status(500).json({ error: "Scraping failed" });
-    }
-  }
+
 
   static async testSearch(req: Request, res: Response) {
     try {

@@ -1,0 +1,163 @@
+PS C:\Users\Lenovo\OneDrive\Documents\GitHub\apt-listing> npm start
+
+> apt-listings-scraper@1.0.0 start
+> ts-node src/index.ts
+
+Server running on port 3000
+Starting full workflow test for: { search: 'top home listing websites', location: 'harlem' }
+Waiting for either popup or captcha...
+Found captcha, attempting to solve...
+Starting captcha bypass...
+Found captcha button at: { x: 407, y: 398.5, height: 74, width: 530 }
+Pressing mouse button...
+Holding for 10 seconds...
+Releasing mouse button...
+Waiting for verification...
+Scrolling to load all listings...
+Scrolling: found 24 listings...
+Starting extraction of all listings...
+Found 24 total cards
+Extracted 9 listings
+Workflow completed: {
+  googleLinks: [
+    'https://www.zillow.com/',
+    'https://www.zillow.com/homes/for_sale/',
+    'https://www.zillow.com/how-much-is-my-home-worth/',
+    'https://www.zillow.com/homes/for_rent/',
+    'https://www.zillow.com/homeloans/?utm_source=zillow&utm_medium=referral&utm_campaign=Z_Mortgagestopnav#source=Z_Mortgagestopnav'
+  ],
+  listingData: [
+    {
+      address: '223 Pleasantdale Rd, Rutland, MA 01543',
+      price: '$659,000',
+      beds: '4',
+      baths: '3',
+      sqft: '2,493'
+    },
+    {
+      address: '85 Paddock Rd, Rutland, MA 01543',
+      price: '$489,900',
+      beds: '3',
+      baths: '2',
+      sqft: '1,144'
+    },
+    {
+      address: '26 Cherylann Dr, Rutland, MA 01543',
+      price: '$499,900',
+      beds: '3',
+      baths: '2',
+      sqft: '1,590'
+    },
+    {
+      address: '238 Barre Paxton Rd, Rutland, MA 01543',
+      price: '$459,900',
+      beds: '2',
+      baths: '3',
+      sqft: '1,607'
+    },
+    {
+      address: '315 Pleasantdale Rd, Rutland, MA 01543',
+      price: '$689,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,488'
+    },
+    {
+      address: '176 Maple Ave APT 6-3, Rutland, MA 01543',
+      price: '$165,000',
+      beds: 'Beds not found',
+      baths: '1',
+      sqft: '586'
+    },
+    {
+      address: '25 Soucy Dr #25, Rutland, MA 01543',
+      price: '$549,900',
+      beds: '2',
+      baths: '3',
+      sqft: '1,705'
+    },
+    {
+      address: '4 Forest Hill Dr #4, Rutland, MA 01543',
+      price: '$759,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,484'
+    {
+      address: '25 Soucy Dr #25, Rutland, MA 01543',
+      price: '$549,900',
+      beds: '2',
+      baths: '3',
+      sqft: '1,705'
+    },
+    {
+      address: '4 Forest Hill Dr #4, Rutland, MA 01543',
+      price: '$759,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,484'
+      price: '$549,900',
+      beds: '2',
+      baths: '3',
+      sqft: '1,705'
+    },
+    {
+      address: '4 Forest Hill Dr #4, Rutland, MA 01543',
+      price: '$759,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,484'
+      baths: '3',
+      sqft: '1,705'
+    },
+    {
+      address: '4 Forest Hill Dr #4, Rutland, MA 01543',
+      price: '$759,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,484'
+    },
+    {
+      address: '4 Forest Hill Dr #4, Rutland, MA 01543',
+      price: '$759,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,484'
+    },
+      address: '4 Forest Hill Dr #4, Rutland, MA 01543',
+      price: '$759,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,484'
+    },
+      baths: '3',
+      sqft: '2,484'
+    },
+    {
+      address: '238 Barre Paxton Rd #238, Rutland, MA 01543',
+      price: '$459,900',
+    },
+    {
+      address: '238 Barre Paxton Rd #238, Rutland, MA 01543',
+      price: '$459,900',
+      beds: '2',
+      baths: '3',
+    {
+      address: '238 Barre Paxton Rd #238, Rutland, MA 01543',
+      price: '$459,900',
+      beds: '2',
+      baths: '3',
+      address: '238 Barre Paxton Rd #238, Rutland, MA 01543',
+      price: '$459,900',
+      beds: '2',
+      baths: '3',
+      sqft: '1,607'
+    }
+      beds: '2',
+      baths: '3',
+      sqft: '1,607'
+    }
+      sqft: '1,607'
+    }
+    }
+  ]
+}

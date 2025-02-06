@@ -1,0 +1,306 @@
+Starting full workflow test for: { search: 'top home listing websites', location: 'harlem' }
+Waiting for either popup or captcha...
+Found popup, attempting to skip...
+Scrolling to load all listings...
+Scrolling: found 42 listings...
+Starting extraction of all listings...
+Found 42 total cards
+Extracted 41 listings
+Workflow completed: {
+  googleLinks: [
+    'https://www.zillow.com/',
+    'https://www.zillow.com/homes/for_sale/',
+    'https://www.zillow.com/how-much-is-my-home-worth/',
+    'https://www.zillow.com/homes/for_rent/',
+    'https://www.zillow.com/homeloans/?utm_source=zillow&utm_medium=referral&utm_campaign=Z_Mortgagestopnav#source=Z_Mortgagestopnav'
+  ],
+  listingData: [
+    {
+      address: '180 Ballard Dr, Harlem, GA 30814',
+      price: '$639,900',
+      beds: '4',
+      baths: '4',
+      sqft: '4,660'
+    },
+    {
+      address: '275 Barrett St, Harlem, GA 30814',
+      price: '$215,000',
+      beds: '3',
+      baths: '2',
+      sqft: '1,204'
+    },
+    {
+      address: '611 Lamkin Rd, Harlem, GA 30814',
+      price: '$269,999',
+      beds: '4',
+      baths: '2',
+      sqft: '1,779'
+    },
+    {
+      address: '6260 Harp Dr, Harlem, GA 30814',
+      price: '$169,900',
+      beds: '3',
+      baths: '2',
+      sqft: '1,136'
+    },
+    {
+      address: '345 Shagbark Way, Harlem, GA 30814',
+      price: '$1,225,000',
+      beds: '4',
+      baths: '5',
+      sqft: '3,800'
+    },
+    {
+      address: '2520 Otts Ln, Harlem, GA 30814',
+      price: '$749,900',
+      beds: '5',
+      baths: '4',
+      sqft: '3,200'
+    },
+    {
+      address: '869 Sweetgrass Cir, Harlem, GA 30814',
+      price: '$283,400',
+      beds: '3',
+      baths: '2',
+      sqft: '1,662'
+    },
+    {
+      address: '180 Headwaters Dr, Harlem, GA 30814',
+      price: '$329,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,275'
+    },
+    {
+      address: '874 Sweetgrass Cir, Harlem, GA 30814',
+      price: '$337,400',
+      beds: '3',
+      baths: '3',
+      sqft: '2,141'
+    },
+    {
+      address: '851 Sweetgrass Cir, Harlem, GA 30814',
+      price: '$293,900',
+      beds: '3',
+      baths: '3',
+      sqft: '1,881'
+    },
+    {
+      address: '115 Dozier Dr, Harlem, GA 30814',
+      price: '$299,169',
+      beds: '4',
+      baths: '3',
+      sqft: '2,399'
+    },
+    {
+      address: '976 Old Louisville Rd, Harlem, GA 30814',
+      price: '$949,900',
+      beds: '4',
+      baths: '5',
+      sqft: '3,609'
+    },
+    {
+      address: '612 Garland Trl, Harlem, GA 30814',
+      price: '$329,900',
+      beds: '4',
+      baths: '3',
+      sqft: '1,996'
+    },
+    {
+      address: '311 Tupelo Pass, Harlem, GA 30814',
+      price: '$355,900',
+      beds: '4',
+      baths: '3',
+      sqft: '3,045'
+    },
+    {
+      address: '2165 Southland Dr, Harlem, GA 30814',
+      price: '$334,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,455'
+    },
+    {
+      address: '806 Sweetgrass Cir, Harlem, GA 30814',
+      price: '$331,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,269'
+    },
+    {
+      address: '4212 Whitehouse St, Harlem, GA 30814',
+      price: '$359,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,025'
+    },
+    {
+      address: 'The Easton Plan, Hickory Woods',
+      price: '$302,900+',
+      beds: '3',
+      baths: '2',
+      sqft: '1,900'
+    },
+    {
+      address: '316 Tupelo Pass, Harlem, GA 30814',
+      price: '$341,665',
+      beds: '4',
+      baths: '3',
+      sqft: '2,455'
+    },
+    {
+      address: '413 Chickadee Way, Harlem, GA 30814',
+      price: '$359,900',
+      beds: '4',
+      baths: '3',
+      sqft: '3,045'
+    },
+    {
+      address: '631 Garland Trl, Harlem, GA 30814',
+      price: '$384,000',
+      beds: '4',
+      baths: '3',
+      sqft: '2,388'
+    },
+    {
+      address: '318 Tupelo Pass, Harlem, GA 30814',
+      price: '$370,835',
+      beds: '4',
+      baths: '3',
+      sqft: '3,045'
+    },
+    {
+      address: '921 Sweetgrass Cir, Harlem, GA 30814',
+      price: '$330,400',
+      beds: '4',
+      baths: '3',
+      sqft: '2,294'
+    },
+    {
+      address: '417 Chickadee Way, Harlem, GA 30814',
+      price: '$358,000',
+      beds: '4',
+      baths: '3',
+      sqft: '2,653'
+    },
+    {
+      address: '414 Chickadee Way, Harlem, GA 30814',
+      price: '$355,630',
+      beds: '4',
+      baths: '4',
+      sqft: '2,797'
+    },
+    {
+      address: '320 Tupelo Pass, Harlem, GA 30814',
+      price: '$368,000',
+      beds: '4',
+      baths: '3',
+      sqft: '2,689'
+    },
+    {
+      address: '640 Garland Trl, Harlem, GA 30814',
+      price: '$325,900',
+      beds: '4',
+      baths: '3',
+      sqft: '2,025'
+    },
+    {
+      address: '4111 Whitehouse St, Harlem, GA 30814',
+      price: '$379,220',
+      beds: '4',
+      baths: '3',
+      sqft: '2,689'
+    },
+    {
+      address: '174 Village Run, Harlem, GA 30814',
+      price: '$214,000',
+      beds: '2',
+      baths: '3',
+      sqft: '1,105'
+    },
+    {
+      address: 'The Rembert Plan, Hickory Woods',
+      price: '$359,900+',
+      beds: '4',
+      baths: '3',
+      sqft: '3,175'
+    },
+    {
+      address: '599 Byrd Dr, Harlem, GA 30814',
+      price: '$79,900',
+      beds: 'Beds not found',
+      baths: 'Baths not found',
+      sqft: 'Sqft not found'
+    },
+    {
+      address: '4105 Whitehouse St, Harlem, GA 30814',
+      price: '$391,120',
+      beds: '5',
+      baths: '4',
+      sqft: '3,045'
+    },
+    {
+      address: '4112 Whitehouse St, Harlem, GA 30814',
+      price: '$363,960',
+      beds: '4',
+      baths: '3',
+      sqft: '2,797'
+    },
+    {
+      address: 'The Rembert Plan, Greenpoint',
+      price: '$380,900+',
+      beds: '4',
+      baths: '3',
+      sqft: '3,175'
+    },
+    {
+      address: '1564 Joy Rd, Harlem, GA 30814',
+      price: '$329,900',
+      beds: '2',
+      baths: '1',
+      sqft: '1,078'
+    },
+    {
+      address: '4115 Whitehouse St, Harlem, GA 30814',
+      price: '$389,860',
+      beds: '4',
+      baths: '3',
+      sqft: '3,045'
+    },
+    {
+      address: '4116 Whitehouse St, Harlem, GA 30814',
+      price: '$378,995',
+      beds: '4',
+      baths: '3',
+      sqft: '2,651'
+    },
+    {
+      address: 'The Bancroft Plan, Greenpoint',
+      price: '$305,900+',
+      beds: '3',
+      baths: '2',
+      sqft: '1,554'
+    },
+    {
+      address: '1633 Old Appling Harlem Hwy, Harlem, GA 30814',
+      price: '$169,900',
+      beds: 'Beds not found',
+      baths: 'Baths not found',
+      sqft: 'Sqft not found'
+    },
+    {
+      address: '4109 Whitehouse St, Harlem, GA 30814',
+      price: '$369,950',
+      beds: '4',
+      baths: '3',
+      sqft: '3,045'
+    },
+    {
+      address: '4119 Whitehouse St, Harlem, GA 30814',
+      price: '$383,495',
+      beds: '4',
+      baths: '3',
+      sqft: '2,651'
+    }
+  ]
+}

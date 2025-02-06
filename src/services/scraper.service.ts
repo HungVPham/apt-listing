@@ -9,16 +9,6 @@ declare global {
   }
 }
 
-interface Listing {
-  price: string;
-  address: string;
-  beds: number;
-  baths: number;
-  sqft: number;
-  details: string;
-  url: string;
-}
-
 interface ListingData {
   address: string;
   price: string;
@@ -140,25 +130,6 @@ export class ScraperService {
     }
   }
 
-  async scrapeListings(searchQuery: string): Promise<Listing[]> {
-    if (!this.browser) throw new Error("Browser not initialized");
-
-    const page = await this.browser.newPage();
-    await page.goto("https://www.google.com");
-
-    // Step 1: Perform Google search
-    await this.performGoogleSearch(page, searchQuery);
-
-    // Step 2: Navigate to Zillow
-    await this.navigateToZillow(page);
-
-    // Step 3-7: Scrape listings with pagination
-    const listings = await this.scrapeZillowListings(page);
-
-    await page.close();
-    return listings;
-  }
-
   private async performGoogleSearch(page: puppeteer.Page, query: string) {
     // Add random delays between keystrokes
     for (const char of query) {
@@ -200,83 +171,6 @@ export class ScraperService {
         behavior: "smooth",
       });
     });
-  }
-
-  private async navigateToZillow(page: puppeteer.Page) {
-    const zillowLink = await page.waitForSelector('a[href*="zillow.com"]');
-    await Promise.all([page.waitForNavigation(), zillowLink?.click()]);
-  }
-
-  private async scrapeZillowListings(page: puppeteer.Page): Promise<Listing[]> {
-    const listings: Listing[] = [];
-
-    while (true) {
-      // Scroll to load all listings
-      await page.evaluate(async () => {
-        window.scrollTo(0, document.body.scrollHeight);
-      });
-
-      // After scrolling and before extraction, add wait for content
-      await page.waitForFunction(
-        () => {
-          const cards = document.querySelectorAll(
-            'ul[class*="List"] > li[class*="ListItem"]'
-          );
-          const visibleCards = Array.from(cards).filter((card) => {
-            const rect = card.getBoundingClientRect();
-            return rect.top >= 0 && rect.bottom <= window.innerHeight;
-          });
-          return visibleCards.length > 0;
-        },
-        { timeout: 10000 }
-      );
-
-      // Extract listing data
-      const currentPageListings = await page.$$eval(".list-card", (cards) =>
-        cards.map((card) => ({
-          price:
-            card.querySelector(".list-card-price")?.textContent?.trim() || "",
-          address:
-            card.querySelector(".list-card-addr")?.textContent?.trim() || "",
-          beds: parseInt(
-            card.querySelector(".list-card-details li:nth-child(1)")
-              ?.textContent || "0"
-          ),
-          baths: parseInt(
-            card.querySelector(".list-card-details li:nth-child(2)")
-              ?.textContent || "0"
-          ),
-          sqft: parseInt(
-            card
-              .querySelector(".list-card-details li:nth-child(3)")
-              ?.textContent?.replace(/,/g, "") || "0"
-          ),
-          details: "",
-          url: card.querySelector("a")?.href || "",
-        }))
-      );
-
-      // Get child page details
-      for (const listing of currentPageListings) {
-        const detailPage = await this.browser!.newPage();
-        await detailPage.goto(listing.url);
-        listing.details = await detailPage.$eval(
-          ".ds-container",
-          (el) => el.textContent?.trim() || ""
-        );
-        await detailPage.close();
-      }
-
-      listings.push(...currentPageListings);
-
-      // Check for next page
-      const nextButton = await page.$('a[rel="next"]');
-      if (!nextButton) break;
-
-      await Promise.all([page.waitForNavigation(), nextButton.click()]);
-    }
-
-    return listings;
   }
 
   async testGoogleSearch(query: string): Promise<string[]> {
@@ -362,9 +256,18 @@ export class ScraperService {
       console.log("Releasing mouse button...");
       await this.page!.mouse.up();
 
-      // Wait to see if verification completes
-      console.log("Waiting for verification...");
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      // Wait for captcha to be solved: check that both the main captcha element
+      // and any iframe challenge are gone.
+      console.log("Waiting for captcha to be solved...");
+      await this.page!.waitForFunction(
+        () =>
+          !document.querySelector("#px-captcha") &&
+          !document.querySelector('iframe[title*="challenge"]'),
+        { timeout: 15000 }
+      );
+      console.log("Captcha appears to be solved.");
+      // Additional delay to ensure page state is updated after bypassing captcha
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (error) {
       console.error("Captcha bypass failed:", error);
       throw error; // Re-throw to handle in calling function
@@ -378,15 +281,14 @@ export class ScraperService {
 
     try {
       if (location) {
-        // Add random mouse movements before typing
+        // Now simulate human-like interaction with the location search input.
         const searchBox = await this.page!.waitForSelector(
           'input[placeholder="Enter an address, neighborhood, city, or ZIP code"]'
         );
-
         if (searchBox) {
           const box = await searchBox.boundingBox();
           if (box) {
-            // Move mouse naturally to search box
+            // Move mouse naturally to the search box
             await this.page!.mouse.move(
               box.x + box.width / 2 + (Math.random() * 10 - 5),
               box.y + box.height / 2 + (Math.random() * 10 - 5),
@@ -399,8 +301,8 @@ export class ScraperService {
           }
         }
 
-        // Type with human-like delays and intentional typos
-        const typoLocation = location.slice(0, -2) + "alw"; // Add typo at end
+        // Type with human-like delays and simulate a typo with subsequent correction
+        const typoLocation = location.slice(0, -2) + "alw"; // Simulate a typo
         for (const char of typoLocation) {
           await this.page!.keyboard.type(char, {
             delay: 100 + Math.floor(Math.random() * 200),
@@ -415,15 +317,13 @@ export class ScraperService {
           setTimeout(resolve, 800 + Math.random() * 400)
         );
 
-        // Delete the typo
-        await this.page!.keyboard.press("Backspace");
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        await this.page!.keyboard.press("Backspace");
-        await new Promise((resolve) => setTimeout(resolve, 200));
-        await this.page!.keyboard.press("Backspace");
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        // Delete the typo characters to simulate correction
+        for (let i = 0; i < 3; i++) {
+          await this.page!.keyboard.press("Backspace");
+          await new Promise((resolve) => setTimeout(resolve, 100 + i * 100));
+        }
 
-        // Type the correct ending
+        // Type the correct ending characters
         for (const char of location.slice(-2)) {
           await this.page!.keyboard.type(char, {
             delay: 150 + Math.floor(Math.random() * 200),
@@ -432,8 +332,8 @@ export class ScraperService {
             setTimeout(resolve, 100 + Math.random() * 100)
           );
         }
-
-        // Random pause before pressing Enter
+        
+        // Random pause before confirming with Enter
         await new Promise((resolve) =>
           setTimeout(resolve, 1000 + Math.random() * 1000)
         );
@@ -468,7 +368,7 @@ export class ScraperService {
 
           if (element.type === "popup") {
             console.log("Found popup, attempting to skip...");
-            
+
             // Click the skip button without waiting for navigation
             await this.page!.evaluate(() => {
               const skipButton = document.querySelector(
@@ -485,17 +385,22 @@ export class ScraperService {
                 { timeout: 10000 }
               ),
               // Wait for content to appear
-              this.page!.waitForSelector('article[class*="StyledPropertyCard"]', {
-                visible: true,
-                timeout: 10000
-              })
+              this.page!.waitForSelector(
+                'article[class*="StyledPropertyCard"]',
+                {
+                  visible: true,
+                  timeout: 10000,
+                }
+              ),
             ]);
 
             // Wait for network to settle
-            await this.page!.waitForNetworkIdle({ 
-              idleTime: 1000, 
-              timeout: 10000 
-            }).catch(() => console.log("Network didn't fully settle, continuing anyway"));
+            await this.page!.waitForNetworkIdle({
+              idleTime: 1000,
+              timeout: 10000,
+            }).catch(() =>
+              console.log("Network didn't fully settle, continuing anyway")
+            );
 
             // Add a small delay to ensure everything is loaded
             await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -510,7 +415,7 @@ export class ScraperService {
           });
         }
 
-        // Before extracting data, add scrolling logic
+        // Before extracting data, add improved scrolling logic
         console.log("Scrolling to load all listings...");
 
         // First, get initial listing count
@@ -521,10 +426,11 @@ export class ScraperService {
             ).length
         );
 
-        // Scroll until no new listings are loaded
         let previousCount = 0;
         let currentCount = initialCount;
-        while (previousCount !== currentCount) {
+        let scrollAttempts = 0;
+        const maxScrollAttempts = 10;
+        while (previousCount !== currentCount && scrollAttempts < maxScrollAttempts) {
           previousCount = currentCount;
 
           // Scroll in chunks
@@ -544,6 +450,7 @@ export class ScraperService {
           );
 
           console.log(`Scrolling: found ${currentCount} listings...`);
+          scrollAttempts++;
         }
 
         // Scroll back to top
@@ -625,7 +532,14 @@ export class ScraperService {
         }
 
         console.log(`Extracted ${listingData.length} listings`);
-        return listingData;
+
+        // Deduplicate listings based on address to avoid duplicates
+        const uniqueListings = listingData.filter(
+          (listing, index, self) =>
+            index === self.findIndex((l) => l.address === listing.address)
+        );
+
+        return uniqueListings;
       }
       return [
         {
